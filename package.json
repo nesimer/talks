@@ -1,0 +1,12 @@
+{
+  "name": "talks",
+  "packageManager": "yarn@4.4.0",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest lab/${0}",
+    "start": "node lab/${0}/index.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
