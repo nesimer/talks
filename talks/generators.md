@@ -86,15 +86,13 @@ Released en 2015 ➡️ **ES6**
 
 ---
 
-**Mais Kezako ??**
+#### Mais Kezako ?
 
-Les generators sont des fonctions qui peuvent être **interrompues** et **reprises** ultérieurement.
+> Les generators sont des fonctions qui peuvent être **interrompues** et **reprises** ultérieurement.
 
----
+#### Quel intérêt?
 
-**Quel intérêt?**
-
-Simplification de la gestion des états, lecture séquentielle des données, meilleure gestion des ressources, ...
+> Simplification de la gestion des états, lecture séquentielle des données, meilleure gestion des ressources, ...
 
 ---
 
@@ -219,7 +217,7 @@ function* generatorFunction() {
 }
 ```
 
----
+<!-- ---
 
 ## Cas pratiques
 
@@ -330,10 +328,11 @@ handleGenerator(generator);
 ---
 
 - `generateRandomNumbers` est une generator qui itère de manière infini en effectuant pour chaque **loop** un `yield` d'un nombre aléatoire.
-- `handleGenerator` consomme les donnnées provenant du generator via `for await ... of`, les traite et si une condition est remplie, coupe le generator infini.
+- `handleGenerator` consomme les donnnées provenant du generator via `for await ... of`, les traite et si une condition est remplie, coupe le generator infini. -->
 
 ---
-
+<!-- _header: "" -->
+<!-- _footer: "" -->
 ![bg](../assets/final.jpg)
 
 ---
