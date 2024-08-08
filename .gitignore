@@ -6,3 +6,5 @@
 
 #!.yarn/cache
 .pnp.*
+
+*.html
