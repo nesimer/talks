@@ -7,7 +7,7 @@
     "lab:start": "node lab/${0}/index.js",
     "marp": "npx @marp-team/marp-cli@latest",
     "show": "yarn marp -w",
-    "serve": "yarn marp -s ."
+    "serve": "yarn marp -s talks"
   },
   "devDependencies": {
     "jest": "^29.7.0"

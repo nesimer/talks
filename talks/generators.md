@@ -2,7 +2,7 @@
 marp: true
 theme: uncover
 header: "Les generators: Simplifier le traitement des flux de données"
-footer: "Nicolas Remise - Jug Summer Camp 2024 ![width:30px](../assets/logo-summercamp.png)"
+footer: "Nicolas Remise - Jug Summer Camp 2024 ![width:30px](./assets/logo-summercamp.png)"
 paginate: true
 ---
 <!-- _header: "" -->
@@ -12,25 +12,25 @@ paginate: true
 
 Simplifier le traitement des flux de données
 
-![height:100px](../assets/js.png)
+![height:100px](./assets/js.png)
 
-![bg left](../assets/stream.jpg)
+![bg left](./assets/stream.jpg)
 
 ---
 
 ### **N**icolas **Remise**
 
-![bg right](../assets/me.jpg)
+![bg right](./assets/me.jpg)
 
 Tech Lead JS/TS/Data
 
-![height:100px](../assets/darva.png)
+![height:100px](./assets/darva.png)
 
 ---
 
- ![height:150px](../assets/ts.png)  ![height:150px](../assets/js.png)
- ![height:150px](../assets/rust.png)  
- ![height:150px](../assets/mongodb.png)
+ ![height:150px](./assets/ts.png)  ![height:150px](./assets/js.png)
+ ![height:150px](./assets/rust.png)  
+ ![height:150px](./assets/mongodb.png)
 
 ---
 
@@ -47,7 +47,7 @@ Grosse volumetrie de documents journaliers au format `JSON`
 Pas d'ETL pour effectuer les transformations sur les données pour les rendre plus _"interprétables"_
 
 ---
-![bg left](../assets/js-big.png)
+![bg left](./assets/js-big.png)
 
 ## Le choix du langage
 
@@ -76,7 +76,7 @@ Pas d'ETL pour effectuer les transformations sur les données pour les rendre pl
 
 ## Découverte des generators
 
-![bg right](../assets/spongebob-rainbow.webp)
+![bg right](./assets/spongebob-rainbow.webp)
 
 ---
 
@@ -113,7 +113,7 @@ console.log(g.next().value); // undefined
 ```
 
 ---
-![bg left](../assets/books.jpg)
+![bg left](./assets/books.jpg)
 
 ## Protocoles `Iterator` et `Iterable`
 
@@ -175,7 +175,7 @@ Un generator est aussi un objet `Iterable` car il implémente `[Symbol.iterator]
 
 ---
 
-![bg right](../assets/woodworking.jpg)
+![bg right](./assets/woodworking.jpg)
 
 ## Dans la pratique
 
@@ -191,7 +191,7 @@ Un generator est aussi un objet `Iterable` car il implémente `[Symbol.iterator]
 
 ---
 
-![bg left](../assets/opposition.jpg)
+![bg left](./assets/opposition.jpg)
 
 **Différences avec des fonctions classiques**
 
@@ -221,7 +221,7 @@ function* generatorFunction() {
 
 ## Cas pratiques
 
-![width:500px](../assets/akindofmagic.gif)
+![width:500px](./assets/akindofmagic.gif)
 
 ---
 
@@ -333,7 +333,7 @@ handleGenerator(generator);
 ---
 <!-- _header: "" -->
 <!-- _footer: "" -->
-![bg](../assets/final.jpg)
+![bg](./assets/final.jpg)
 
 ---
 
@@ -470,7 +470,7 @@ it("should ...", async () => {
 <!-- header: "" -->
 <!-- footer: "" -->
 
-![bg](../assets/bg-jug.png)
+![bg](./assets/bg-jug.png)
 
 ## Fin
 
