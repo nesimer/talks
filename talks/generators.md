@@ -4,6 +4,10 @@ theme: uncover
 header: "Les generators: Simplifier le traitement des flux de données"
 footer: "Nicolas Remise - Jug Summer Camp 2024 ![width:30px](./assets/logo-summercamp.png)"
 paginate: true
+style: |
+  h3>strong {
+    color: darkgrey !important;
+  }
 ---
 <!-- _header: "" -->
 <!-- _paginate: false -->
@@ -86,9 +90,11 @@ Released en 2015 ➡️ **ES6**
 
 ---
 
-#### Mais Kezako ?
+### Mais Kezako ?
 
 > Les generators sont des fonctions qui peuvent être **interrompues** et **reprises** ultérieurement.
+
+---
 
 #### Quel intérêt?
 
@@ -193,7 +199,7 @@ Un generator est aussi un objet `Iterable` car il implémente `[Symbol.iterator]
 
 ![bg left](./assets/opposition.jpg)
 
-**Différences avec des fonctions classiques**
+### Différences avec des fonctions classiques
 
 ---
 
@@ -217,7 +223,7 @@ function* generatorFunction() {
 }
 ```
 
-<!-- ---
+---
 
 ## Cas pratiques
 
@@ -328,7 +334,7 @@ handleGenerator(generator);
 ---
 
 - `generateRandomNumbers` est une generator qui itère de manière infini en effectuant pour chaque **loop** un `yield` d'un nombre aléatoire.
-- `handleGenerator` consomme les donnnées provenant du generator via `for await ... of`, les traite et si une condition est remplie, coupe le generator infini. -->
+- `handleGenerator` consomme les donnnées provenant du generator via `for await ... of`, les traite et si une condition est remplie, coupe le generator infini.
 
 ---
 <!-- _header: "" -->
@@ -342,7 +348,6 @@ handleGenerator(generator);
 ---
 
 ### Problématique
-(Rappel)
 
 Un flux de données arrive en entrée
 
@@ -371,6 +376,26 @@ async function bootstrap(){
 
 ---
 
+OU
+
+```js
+async function bootstrap(){
+    const dataStream = /* flux de données async */
+
+    const results = [];
+
+    dataStream.on('data', (data)=>{
+      // TODO SIMPLIFY with generator!
+      let data1 = await action1(data);
+      let data2 = await action2(data1);
+      /* ...actionN(dataN-1) */
+      results.push(data2)
+    });
+}
+```
+
+---
+
 ### Nos generators
 
 ```js
@@ -393,17 +418,13 @@ async function* action2Generator(input) {
 
 ```js
 async function bootstrap(){
-    const dataStream = /* mon flux de données async (fichiers, bdd, etc...) */
-    const results = [];
-
-    const pipe = piper(
+    const results = await chain(
+        generatorThatYieldStream,
         action1Generator, 
-        action2Generator 
+        action2Generator,
         /* , ...actionNGenerator*/
+        generatorThatOutResults
     );
-    for await (const chunk of pipe(dataStream))(
-        results.push(chunk)
-    )
 }
 ```
 
@@ -418,22 +439,26 @@ La logique métier est sorti du process de run
 ### La magical touch 🪄
 
 ```js
-function piper(...fns) {
-    return stream => 
-    fns
-        .filter(Boolean)
-        .reduce(
-            (accStream, fn) => fn(accStream), 
-            stream
-        );
-} 
+async function chain(...fns) {
+  const dataPipe = fns.filter(Boolean).reduce(
+    (accumulatedData, fn) => fn(accumulatedData),
+    undefined
+  );
+
+  let results = [];
+  for await (const result of dataPipe) {
+    results.push(result);
+  }
+
+  return results.length === 1 ? results[0] : results;
+}
 ```
 
 ---
 
-La fonction `piper` permet de **chainer de manière sequentielle et dans l'ordre fournies** les différentes opérations passées en paramètre.
+La fonction `chain` permet de **chainer de manière sequentielle et dans l'ordre fournies** les différentes opérations passées en paramètre.
 
-Il ne reste plus qu'à éxécuter la closure retournée avec le stream. 🎉
+Elle consomme aussi ce chainage et retourne le ou les resultats du traitement de données.
 
 ---
 

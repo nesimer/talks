@@ -1,6 +1,6 @@
-import toString from "./toString.js";
+import stringifier from "./stringifier.js";
 
-describe('toString', () => {
+describe('stringifier', () => {
   it('should format data as expected', async () => {
     const input = [
       {
@@ -22,7 +22,7 @@ describe('toString', () => {
     expect.assertions(input.length);
 
     let index = 0;
-    for await (const chunk of toString(input.values())) {
+    for await (const chunk of stringifier(input.values())) {
       const { country, sport, firstName, lastName } = input[index];
       expect(chunk).toBe(`[${country.name}] [${sport}] ${firstName} ${lastName.toUpperCase()}`)
       index++;

@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { toConsumerGenerator } from '../tools.js';
 
 let countries;
 /**
@@ -21,12 +22,12 @@ async function getCountryById(id) {
 /**
  * Replace country id by country data 
  * 
- * @param {*} input - stream data
+ * @param {*} data
  */
-export default async function* (input) {
-  for await (const chunk of input) {
-    const { country: countryId, ...data } = chunk;
-    const country = await getCountryById(countryId);
-    yield { ...data, country };
-  }
+async function addDetails(data) {
+  const { country: countryId, ...rest } = data;
+  const country = await getCountryById(countryId);
+  return { ...rest, country }
 }
+
+export default toConsumerGenerator(addDetails)

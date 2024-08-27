@@ -1,11 +1,13 @@
+import { toConsumerGenerator } from "../tools.js";
+
 /**
- * Log each data passed from  input stream
+ * Log data passed
  * 
- * @param {*} input - stream data
+ * @param {*} data
  */
-export default async function* logger(input) {
-  for await (const chunk of input) {
-    console.log(chunk);
-    yield chunk;
-  }
+function logger(data) {
+  console.log(data);
+  return data;
 }
+
+export default toConsumerGenerator(logger)
