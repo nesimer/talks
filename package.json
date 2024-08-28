@@ -1,6 +1,6 @@
 {
   "name": "talks",
-  "packageManager": "yarn@4.4.0",
+  "packageManager": "yarn@4.4.1",
   "type": "module",
   "scripts": {
     "lab:test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest lab/${0}",
@@ -11,5 +11,9 @@
   },
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "node-ffi-rs": "^1.0.91"
   }
 }

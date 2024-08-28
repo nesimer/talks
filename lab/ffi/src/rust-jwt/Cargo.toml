@@ -1,0 +1,16 @@
+[package]
+name = "rust-jwt"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+jsonwebtoken = "9.3.0"
+libc = "0.2.158"
+serde = "1.0.209"
+serde_json = "1.0.127"
+
+[lib]
+name="rustjwt"
+path = "src/lib.rs"
+crate-type = ["dylib"]
