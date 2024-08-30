@@ -12,7 +12,7 @@ style: |
 <!-- _header: "" -->
 <!-- _paginate: false -->
 
-# Les generatorss
+# Les generators
 
 Simplifier le traitement des flux de données
 

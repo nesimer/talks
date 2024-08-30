@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "lab:test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest lab/${0}",
-    "lab:start": "node lab/${0}/index.js",
+    "lab:start": "node lab/${0}",
     "marp": "npx @marp-team/marp-cli@latest",
     "show": "yarn marp -w",
     "serve": "yarn marp -s talks"
