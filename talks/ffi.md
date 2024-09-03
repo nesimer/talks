@@ -87,7 +87,7 @@ Les `FFI` permettent à un programme écrit dans un langage de programmation d'a
 
 Pour résumé, les FFI sont une fonctionnalité de niche puissante.
 
-Non spécifiques à un langage, il s'agit d'une **une norme d'interfaçage**.
+Non spécifiques à un langage, il s'agit d'une **norme d'interfaçage**.
 
 <!-- > Votez FFI c'est choisir le meilleur outil pour chaque tâche! (Jean-Luc **MergeAFond**) -->
 
@@ -308,7 +308,6 @@ Les **ffi/addons** sont une des nombreuses méthodes pouvant apporter une répon
 ---
 
 ![bg fit](./assets/spin.png)
-
 
 ---
 
