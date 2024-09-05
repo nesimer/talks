@@ -301,7 +301,7 @@ Eco-système Node.js mais sur un moteur V8 en Rust 😉
 
 ---
 
-> Pourquoi ne pas franchir le cap et intégré des microservices de différents langages?
+> Pourquoi ne pas franchir le cap et intégrer des microservices de différents langages?
 
 ---
 
