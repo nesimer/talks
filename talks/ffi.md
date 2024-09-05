@@ -263,6 +263,12 @@ _color: dark
 
 ---
 
+<!-- header: "" -->
+
+![img width:1000px](./assets/ffi-schema.png)
+
+---
+
 ### Results 🏁
 
 Les addons sont performants ! 🎉
