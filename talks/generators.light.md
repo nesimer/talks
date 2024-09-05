@@ -220,8 +220,9 @@ Les transformations/actions doivent être les plus simple à maintenir
 
 ![bg](./assets/bg-jug.png)
 
-## Fin
+## ![img](./assets/JugSummerCamp%202024%20-%20Les%20generators.png)
 
-Merci de votre écoute!
-
+**Merci de votre écoute!**
 Des questions?
+
+[📁 Ressources](https://github.com/nesimer/talks)

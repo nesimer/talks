@@ -293,6 +293,14 @@ Les **ffi/addons** sont une des nombreuses méthodes pouvant apporter une répon
 
 ---
 
+### Deno
+
+Intégration native de module WebAssembly
+
+Eco-système Node.js mais sur un moteur V8 en Rust 😉
+
+---
+
 > Pourquoi ne pas franchir le cap et intégré des microservices de différents langages?
 
 ---
@@ -322,8 +330,9 @@ footer: ""
 
 ![bg](./assets/bg-jug.png)
 
-## Fin
+## ![img](./assets/JugSummerCamp%202024%20-%20FFI.png)
 
-Merci de votre écoute!
-
+**Merci de votre écoute!**
 Des questions?
+
+[📁 Ressources](https://github.com/nesimer/talks)
