@@ -113,11 +113,11 @@ console.log(g.next().value); // undefined
 
 ---
 
-### Protocole `Iterable`
+Un generator est un objet `Iterable` car il implémente `[Symbol.iterator]`, ce qui permet son utilisation dans des boucles `for...of` 😉.
 
-Un objet est `Iterable` s'il implémente une méthode `[Symbol.iterator]` qui renvoie un objet conforme au protocole `Iterator`.
+---
 
-## 🤯
+Les generators implémentent le protocole `Iterator` en fournissant une méthode `next` par le biais de la méthode `next()` fournit par `[Symbol.iterator]`.
 
 ---
 
@@ -140,32 +140,9 @@ const iterable = {
 };
 
 for (const value of iterable) {
-    console.log(value); // Hello, World
+    console.log(value); // "Hello" puis "World"
 }
 ```
-
----
-
-### Protocole `Iterator`
-
-Un objet est un `Iterator` s'il a une méthode `next` qui retourne un objet avec deux propriétés : `value` et `done`.
-
----
-
-```javascript
-const iterator = iterable[Symbol.iterator]();
-console.log(iterator.next()); // { value: 'Hello', done: false }
-console.log(iterator.next()); // { value: 'World', done: false }
-console.log(iterator.next()); // { value: undefined, done: true }
-```
-
----
-
-### Et les generators dans tout ça?
-
-Les generators implémentent le protocole `Iterator` en fournissant une méthode `next` pour contrôler l'exécution et renvoyer les valeurs successives.
-
-Un generator est aussi un objet `Iterable` car il implémente `[Symbol.iterator]`, ce qui permet son utilisation dans des boucles `for...of` 😉.
 
 ---
 
@@ -200,10 +177,6 @@ Un flux de données arrive en entrée
 Plusieurs transformations/actions sont à effectuer sur chacune de ces données
 
 Les transformations/actions doivent être les plus simple à maintenir
-
----
-
-### Et les tests dans tout ça?
 
 ---
 

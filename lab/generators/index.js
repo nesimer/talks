@@ -1,11 +1,7 @@
 import { chain } from "./src/tools.js";
-import addCountryDetails from "./src/generators/addCountryDetails.js";
-import logger from "./src/generators/logger.js";
-import parser from "./src/generators/parser.js";
-import stringifier from "./src/generators/stringifier.js";
-import reader from "./src/generators/reader.js";
-import writer from "./src/generators/writer.js";
+import generators from "./src/generators.js";
 
+const { reader, parser, addCountryDetails, logger, stringifier, writer } = generators;
 
 await chain(
   reader,
