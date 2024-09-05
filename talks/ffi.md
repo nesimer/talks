@@ -247,11 +247,15 @@ _color: dark
 
 ---
 
-## Contexte
+## POC subject
 
 1. lire le fichier `.json` volumineux
 2. signer un JWT avec chaque donnée
 3. écrire un fichier de sortie `.json` contenant les tokens
+
+---
+
+![ffi_process width:1000px](./assets/ffi-process-schema.png)
 
 ---
 
