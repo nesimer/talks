@@ -303,6 +303,16 @@ Les **ffi/addons** sont une des nombreuses méthodes pouvant apporter une répon
 
 ---
 
+### WebAssembly
+
+Alternative aux libs `C`
+
+Intégration plus complexe dans l'éco-système JS
+
+Pas d'accès à l'OS nativement
+
+---
+
 ### Deno
 
 Intégration native de module WebAssembly
