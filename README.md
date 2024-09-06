@@ -24,6 +24,8 @@ This repo contains some talks that I show during some tech events.
 
 `yarn show [path to specific talk]`: generate html version of slides passed as argument (you need to open it with your browser)
 
+> **NOTE** if you have a browser exec installed and want a pdf export do => `CHROME_PATH=$(which {your_browser}) yarn marp --pdf --allow-local-files talks/{wantedFile.md}`
+
 `yarn marp [commands of marp-cli]`: exposes all available commands of `marp-cli`
 
 ## Lab
