@@ -9,6 +9,7 @@ async function bootstrap() {
   const jsLabel = "js";
   const rustLabel = "rust";
   const napiLabel = "napi";
+  const results = [];
 
   const inputPath = join(prefixAssetsPath, "large-file.json");
   const getOutputPath = (label) => join(prefixAssetsPath, `large-file-${label}.json`);
@@ -16,26 +17,19 @@ async function bootstrap() {
   const jsStartDate = Date.now()
   await tokenize(inputPath, getOutputPath(jsLabel));
   const jsDuration = Date.now() - jsStartDate;
+  results.push({ type: jsLabel, durationInMs: jsDuration });
 
   const rustStartDate = Date.now()
   rustTokenize(inputPath, getOutputPath(rustLabel));
   const rustDuration = Date.now() - rustStartDate;
+  results.push({ type: rustLabel, durationInMs: rustDuration });
 
   const napiStartDate = Date.now()
   napiTokenize(inputPath, getOutputPath(napiLabel));
   const napiDuration = Date.now() - napiStartDate;
+  results.push({ type: napiLabel, durationInMs: napiDuration });
 
-  console.table([
-    {
-      type: jsLabel, durationInMs: jsDuration
-    },
-    {
-      type: rustLabel, durationInMs: rustDuration
-    },
-    {
-      type: napiLabel, durationInMs: napiDuration
-    },
-  ])
+  console.table(results)
 }
 
 await bootstrap();
