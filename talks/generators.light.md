@@ -198,4 +198,4 @@ Les transformations/actions doivent être les plus simple à maintenir
 **Merci de votre écoute!**
 Des questions?
 
-[📁 Ressources](https://github.com/nesimer/talks)
+[📁 nesimer/talks](https://github.com/nesimer/talks)
