@@ -7,21 +7,15 @@ await chain(
   reader,
   parser,
   addCountryDetails,
-  logger,
+  // logger,
   stringifier,
   process.env.DEBUG ? logger : writer
 );
 
 //OR without tools
 
-import fs from 'node:fs/promises';
-import path from "path";
-
 async function bootstrap() {
-  const file = await fs.open(path.join(import.meta.dirname, "./assets/athletes.txt"));
-  const stream = file.readLines();
-
-  for await (const chunk of stringifier(logger(addCountryDetails(parser(stream))))) {
+  for await (const chunk of stringifier(logger(addCountryDetails(parser(reader()))))) {
     console.log(chunk)
   }
 }

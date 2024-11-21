@@ -1,8 +1,8 @@
 ---
 marp: true
 theme: uncover
-header: "Les generators: Simplifier le traitement des flux de données"
-footer: "Nicolas Remise - Jug Summer Camp 2024 ![width:30px](./assets/logo-summercamp.png)"
+header: "Les generators: Simplifier le traitement des flux de données - Nicolas Remise"
+footer: "![width:100px](./assets/codeurs-en-seine-logo.png)"
 paginate: true
 style: |
   h3>strong {
@@ -152,17 +152,13 @@ for (const value of iterable) {
 
 ---
 
-### Concepts clés 🔑
+### Keywords 🔑
 
 `yield` : Pause et retourne une valeur.
 
 `next()` : Reprend l'exécution du generator.
 
 `function* ()` : Definit une fonction comme étant une fonction génératrice.
-
----
-
-## Demo time 🧪
 
 ---
 
@@ -180,22 +176,184 @@ Les transformations/actions doivent être les plus simple à maintenir
 
 ---
 
+```javascript
+async function toModernize() {
+  const file = await open(
+    path.join(import.meta.dirname, "myfile.txt")
+    );
+
+  const countries = JSON.parse(await readFile(
+    path.join(import.meta.dirname, 'countries.json')
+    ));
+
+  for await (const line of file.readLines()) {
+    const { country: countryId, ...data } = JSON.parse(line);
+    const enrichedData = { ...data, country: countries.find(i => i.id === countryId) };
+
+    const country = enrichedData.country.name;
+    const sport = enrichedData.sport;
+    const name = `${enrichedData.firstName} ${enrichedData.lastName.toUpperCase()}`;
+    const stringified = `[${country}] [${sport}] ${names}`;
+
+    console.log(stringified);
+  }
+}
+```
+
+---
+
+## Les Transformations
+
+1. parsing
+2. ajout des details des pays
+3. construction de la sortie
+4. logging
+
+---
+
+### To generator's world
+
+```js
+/**
+ * Read input file data
+ */
+export default async function* reader() {
+  const file = await fs.open(
+    path.join(import.meta.dirname, "myfile.txt")
+    );
+  yield* file.readLines();
+}
+```
+
+```js
+for await (const data of reader()){}
+```
+
+---
+
+### Transformation
+
+```js
+const { country: countryId, ...data } = JSON.parse(line);
+```
+
+to
+
+```js
+async function* parser(input) {
+  for await (const chunk of input) {
+    yield JSON.parse(chunk);
+  }
+}
+```
+
+---
+
+```js
+for await (const data of parser(reader())){}
+```
+
+🤔
+
+---
+
+2 problèmes:
+
+- Les actions sont moins lisibles à cause de la consommation du generator précédent
+- La consommation du generator globale est lourde pour appeler le generator `n` avec la valeur du generator `n-1`
+
+---
+
+### toConsumerGenerator
+
+```js
+/**
+ * Build a generator that apply fn passed 
+ * on each data from input that will received
+ * 
+ * @param {Function} fn 
+ * @returns {AsyncGenerator} generator
+ */
+export function toConsumerGenerator(fn) {
+  return async function* (input) {
+    for await (const chunk of input) {
+      yield fn(chunk);
+    }
+  }
+}
+```
+
+---
+
+```js
+function parserFn(data){
+  return JSON.parse(data)
+}
+
+export const parserGenerator = toConsumerGenerator(parserFn)
+```
+
+- lisible
+- maintenable
+- testable
+
+🤩
+
+---
+
+<!-- _header: "" -->
+<!-- _footer: "" -->
+
+### chain
+
+```js
+/**
+ * Chain list of generators and return result
+ * @param  fns - ordered array of operations
+ * @returns result data (array or unique data)
+ */
+export async function chain(...fns) {
+  const dataPipe = fns.filter(Boolean).reduce(
+    (accumulatedData, fn) => fn(accumulatedData),
+    undefined
+  );
+  let results = [];
+  for await (const result of dataPipe) {
+    results.push(result);
+  }
+
+  return results.length === 1 ? results[0] : results;
+}
+```
+
+---
+
+```js
+await chain(reader, parser, ...);
+```
+
+🚀
+
+---
+
+## Demo time 🧪
+
+---
+
 ## Conclusion
 
 - 👍 séparation des logiques
 - 👍 briques logiques **plug'n play** 🧩
 - 👍 performances équivalentes à l'utilisation de `Stream` classiques (voir mieux selon les runs)
 - 🥼 🧪 utilisation de features innovantes 😉
+- 🤩 Functional Programming
   
 ---
 <!-- header: "" -->
 <!-- footer: "" -->
 
-![bg](./assets/bg-jug.png)
-
-## ![img](./assets/JugSummerCamp%202024%20-%20Les%20generators.png)
+## ![img](./assets/codeurs-en-seine-logo.png)
 
 **Merci de votre écoute!**
-Des questions?
 
 [📁 nesimer/talks](https://github.com/nesimer/talks)
