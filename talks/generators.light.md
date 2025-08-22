@@ -268,9 +268,8 @@ for await (const data of parser(reader())){}
 
 ```js
 /**
- * Build a generator that apply fn passed 
+ * Build a generator that apply `fn` passed 
  * on each data from input that will received
- * 
  * @param {Function} fn 
  * @returns {AsyncGenerator} generator
  */
@@ -318,8 +317,8 @@ export async function chain(...fns) {
     undefined
   );
   let results = [];
-  for await (const result of dataPipe) {
-    results.push(result);
+  for await (const data of dataPipe) {
+    results.push(data);
   }
 
   return results.length === 1 ? results[0] : results;
@@ -336,7 +335,59 @@ await chain(reader, parser, ...);
 
 ---
 
-## Demo time 🧪
+## Ce qui donne ... 🎉
+
+---
+
+```js
+const parser = toConsumerGenerator(JSON.parse);
+```
+
+---
+
+```js
+function loggerFn (data) {
+  console.log(data);
+  return data;
+}
+const logger = toConsumerGenerator(loggerFn);
+```
+
+---
+
+```js
+function addCountryDetailsFn (data) {
+  const { country: countryId, ...rest } = data;
+  const country = await getCountryById(countryId);
+  return { ...rest, country }
+};
+
+const addCountryDetails = toConsumerGenerator(addCountryDetailsFn);
+```
+
+---
+
+```js
+function stringifierFn (data) {
+  const { country, sport, lastName, firstName } = data;
+  const fullName = `${firstName} ${lastName.toUpperCase()}`;
+  return `[${country.name}] [${sport}] ${fullName}`;
+}
+
+const stringifier = toConsumerGenerator(stringifierFn);
+```
+
+---
+
+```js
+await chain(
+  reader,
+  parser,
+  addCountryDetails,
+  stringifier,
+  logger
+);
+```
 
 ---
 
