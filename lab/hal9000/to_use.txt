@@ -1,0 +1,28 @@
+/// Health check endpoint
+    ///
+    /// This tool checks the health status of the Elasticsearch cluster
+    /// and returns the server version.
+    /// # Returns
+    /// * `Result<Json<HealthCheckResponse>, String>` - Health status or error message
+    #[tool(name = "health_check", description = "Health check endpoint")]
+    async fn health_check(&self) -> Result<Json<HealthCheckResponse>, String> {
+        let client = Client::new();
+
+        let status = es::check_health(&client, &self.cfg.es_url, &self.cfg.es_api_key)
+            .await
+            .map_err(|_| "false")?;
+
+        let response = HealthCheckResponse {
+            status: status.to_string(),
+            version: env!("CARGO_PKG_VERSION").to_string(),
+        };
+        Ok(Json(response))
+    }
+    
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+pub struct HealthCheckResponse {
+    #[schemars(description = "the health status")]
+    pub status: String,
+    #[schemars(description = "the server version")]
+    pub version: String,
+}
